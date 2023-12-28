@@ -92,7 +92,7 @@ const palette: ThemeOptions["palette"] = {
   },
   primary: {
     light: "#FF66BF",
-    main: "#E20074",
+    main: "#222",
     dark: "#BC0060"
   },
   primaryAlpha: {

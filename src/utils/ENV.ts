@@ -7,8 +7,8 @@ const ENV = {
   MODE,
   AUTH_COOKIE_KEY: "_auth",
   API_BASE_URL: isStaging
-    ? "END_POINT_DOMAIN_STAGING"
-    : "END_POINT_DOMAIN_PRODUCTION"
+    ? "https://api.bitpin.ir/v1/"
+    : "https://api.bitpin.ir/v1/",
 } as const;
 
 export default ENV;
