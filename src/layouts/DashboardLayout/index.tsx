@@ -35,7 +35,6 @@ const DashboardLayout: FC = () => {
     });  };
 
   const onMessageSocket = (event: MessageEvent) => {
-    console.log("message", JSON.parse(event.data));
     
     const data = JSON.parse(event.data);
 
@@ -45,7 +44,6 @@ const DashboardLayout: FC = () => {
         message: "Subscribed to price info."
       });
     } else if (data.message === "PONG") {
-      console.log('pong')
       setSocketStatusInfo({
         status: "Connecting",
         message: "PONG"
