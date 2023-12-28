@@ -1,0 +1,24 @@
+{
+  "root": true,
+  "env": { "browser": true, "es2020": true },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "prettier"
+  ],
+  "ignorePatterns": ["dist", "*.js", "*.cjs"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react-refresh", "prettier"],
+  "rules": {
+    "react-hooks/exhaustive-deps": ["error"],
+    "prettier/prettier": ["error"],
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "prefer": "type-imports",
+        "fixStyle": "inline-type-imports"
+      }
+    ]
+  }
+}
