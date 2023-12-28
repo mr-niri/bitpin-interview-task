@@ -1,12 +1,15 @@
 import { Box, Typography } from "@mui/material";
 import InfiniteList from "components/InfiniteList";
+import { useAtomValue } from "jotai";
 import { FC } from "react";
 import { useAllMarketsListGet } from "services/rest/markets/markets";
 import type { Market } from "services/rest/markets/markets.d";
+import { marketsListAtom } from "store/atoms/globalAtom";
 
 const Markets: FC = () => {
   const { data, isLoading } = useAllMarketsListGet({});
-  
+  const marketsListInfo = useAtomValue(marketsListAtom);
+
   return (
     <InfiniteList<Market & { index: number }>
       items={(data?.results ?? []).map((item, i) => ({
@@ -17,7 +20,8 @@ const Markets: FC = () => {
       itemRenderer={(market: Market) => (
         <Box>
           <Typography>{`${market.title} `}</Typography>
-
+          <Typography>{`${marketsListInfo.marketsList[market.id]?.price ??
+                market.price_info.price}`}</Typography>
         </Box>
       )}
       itemProps={{

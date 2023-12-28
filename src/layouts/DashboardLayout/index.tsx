@@ -1,13 +1,14 @@
 import { useSetAtom } from "jotai";
 import { useEffect, type FC } from "react";
 import { Outlet } from "react-router-dom";
-import { socketStatusAtom } from "store/atoms/globalAtom";
+import { marketsListAtom, socketStatusAtom } from "store/atoms/globalAtom";
 
 import ENV from "utils/ENV";
 
 const DashboardLayout: FC = () => {
   const setSocketStatusInfo = useSetAtom(socketStatusAtom);
-
+  const setMarketListInfo=useSetAtom(marketsListAtom)
+  
   const onOpenSocket = (e: Event) => {
     const ws = e.currentTarget as WebSocket;
     ws.send(
@@ -34,6 +35,28 @@ const DashboardLayout: FC = () => {
 
   const onMessageSocket = (event: MessageEvent) => {
     console.log("message", JSON.parse(event.data));
+    
+    const data = JSON.parse(event.data);
+
+    if (data.message === "sub_to_price_info") {
+      setSocketStatusInfo({
+        status: "Connecting",
+        message: "Subscribed to price info."
+      });
+    } else if (data.message === "pong") {
+      setSocketStatusInfo({
+        status: "Connecting",
+        message: "pong"
+      });
+    } else if (data.event === "currency_price_info_update") {
+
+      // we could have done something like {event, event_time, ...rest} = data
+      // but it could cause some performance issues.
+      delete data.event;
+      delete data.event_time
+      setMarketListInfo({ marketsList: data });
+    }
+
   };
 
   const initialWebSocket = () => {
