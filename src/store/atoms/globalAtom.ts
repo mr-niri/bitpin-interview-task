@@ -1,10 +1,10 @@
 import { atomWithReset } from "jotai/utils";
 
 type SocketStatusAtom = {
-  status: "connected" | "disconnected" | "connecting" | "error";
+  status: "Connected" | "Disconnected" | "Connecting" | "Error";
   message?: string;
 };
 
 export const socketStatusAtom = atomWithReset<SocketStatusAtom>({
-  status: "disconnected"
+  status: "Disconnected"
 });

@@ -1,26 +1,46 @@
+import { useSetAtom } from "jotai";
 import { useEffect, type FC } from "react";
 import { Outlet } from "react-router-dom";
+import { socketStatusAtom } from "store/atoms/globalAtom";
 
 import ENV from "utils/ENV";
 
 const DashboardLayout: FC = () => {
+  const setSocketStatusInfo = useSetAtom(socketStatusAtom);
+
   const onOpenSocket = (e: Event) => {
-    console.log("open", e);
+    const ws = e.currentTarget as WebSocket;
+    ws.send(
+      JSON.stringify({
+        method: "sub_to_price_info"
+      })
+    );
+
+    setSocketStatusInfo({
+      status: "Connected"
+    });
   };
 
   const onCloseSocket = () => {
-    console.log("close");
+    setSocketStatusInfo({
+      status: "Disconnected"
+    });
   };
 
   const onErrorSocket = () => {
-    console.log("error");
-  };
+    setSocketStatusInfo({
+      status: "Disconnected"
+    });  };
 
   const onMessageSocket = (event: MessageEvent) => {
     console.log("message", JSON.parse(event.data));
   };
 
   const initialWebSocket = () => {
+    setSocketStatusInfo({
+      status: "Connecting"
+    });
+
     const ws = new WebSocket(ENV.WEB_SOCKET_URL);
     ws.addEventListener("open", onOpenSocket);
     ws.addEventListener("close", onCloseSocket);
