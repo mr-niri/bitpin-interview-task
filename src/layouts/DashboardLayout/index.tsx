@@ -80,7 +80,7 @@ const DashboardLayout: FC = () => {
           )
         )
       }
-    }, 1000)
+    }, 10000)
 
     return () => {
       clearInterval(pingInterval)
