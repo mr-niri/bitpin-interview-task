@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import { useAtomValue } from "jotai";
 import { FC } from "react";
 import type { Currency } from "services/rest/markets/markets.d";
-import { marketsListAtom } from "store/atoms/globalAtom";
+
 import MarketCardWrapper from "./sytled";
+import PriceInfo from "./view/PriceInfo";
 
 type Props = {
   marketId: number;
@@ -21,8 +21,6 @@ const MarketCard: FC<Props> = ({
   firstCurrency,
   secondCurrency
 }) => {
-  const marketsListInfo = useAtomValue(marketsListAtom);
-  const updatedMarket = marketsListInfo.marketsList[marketId];
   return (
     <MarketCardWrapper>
       <Box className="currencyInformation">
@@ -33,9 +31,8 @@ const MarketCard: FC<Props> = ({
           <img src={secondCurrency.image} alt={secondCurrency.title_fa} />
         </Box>
       </Box>
-      <Typography data-price-change={"s"}>{`${
-        updatedMarket?.price ?? endpointPrice
-      }`}</Typography>
+
+      <PriceInfo endpointPrice={endpointPrice} marketId={marketId} />
     </MarketCardWrapper>
   );
 };
