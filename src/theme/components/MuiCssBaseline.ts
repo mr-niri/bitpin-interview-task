@@ -9,6 +9,22 @@ const MuiCssBaseline: Components["MuiCssBaseline"] = {
           font-weight: normal;
           src: url(/assets/fonts/iransansx/woff2/IRANSansXFaNum-Regular.woff2) format('woff2');
         }
+        html{
+          height: 100vh;
+          width: 100vw;
+          
+        }
+        body , #root{
+          height: 100%;
+          width: 100%;
+        }
+
+        #root{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
       `
 };
 

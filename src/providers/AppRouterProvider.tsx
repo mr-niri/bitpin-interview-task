@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const ErrorPage = lazy(() => import("pages/error"));
 const HomePage = lazy(() => import("pages/home"));
-
+const Markets = lazy(() => import("pages/Markets"));
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -21,8 +21,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <span>dashboard
-            </span>
+            element: <Markets/>
           }
         ]
       }
