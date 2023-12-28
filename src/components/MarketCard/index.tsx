@@ -12,6 +12,8 @@ type Props = {
   titleFa: string;
   firstCurrency: Currency;
   secondCurrency: Currency;
+  endpointMinimumPrice: string;
+  endpointMaximumPrice: string;
 };
 
 const MarketCard: FC<Props> = ({
@@ -19,7 +21,9 @@ const MarketCard: FC<Props> = ({
   marketId,
   titleFa,
   firstCurrency,
-  secondCurrency
+  secondCurrency,
+  endpointMinimumPrice,
+  endpointMaximumPrice
 }) => {
   return (
     <MarketCardWrapper>
@@ -32,7 +36,12 @@ const MarketCard: FC<Props> = ({
         </Box>
       </Box>
 
-      <PriceInfo endpointPrice={endpointPrice} marketId={marketId} />
+      <PriceInfo
+        endpointMinimumPrice={endpointMinimumPrice}
+        endpointMaximumPrice={endpointMaximumPrice}
+        endpointPrice={endpointPrice}
+        marketId={marketId}
+      />
     </MarketCardWrapper>
   );
 };

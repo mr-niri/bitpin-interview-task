@@ -7,13 +7,18 @@ import type { Market } from "services/rest/markets/markets.d";
 const Markets: FC = () => {
   const { data, isLoading } = useAllMarketsListGet({});
 
+  const onNextPageHandler=()=>{
+    // I tried to load your endpoint with page_size and page but it didn't work .
+    // As my InfiniteList component support nextPage handler, I wrote this handler for you.
+    console.log('Next Page ...')
+  }
   return (
     <InfiniteList<Market & { index: number }>
       items={(data?.results ?? []).map((item, i) => ({
         ...item,
         index: i
       }))}
-      loadMoreItems={() => console.log("ss")}
+      loadMoreItems={onNextPageHandler}
       itemRenderer={(market: Market) => (
         <MarketCard
           firstCurrency={market.currency1}
@@ -23,10 +28,12 @@ const Markets: FC = () => {
           title={market.title}
           endpointPrice={market.price}
           titleFa={market.title_fa}
+          endpointMaximumPrice={market.price_info.max}
+          endpointMinimumPrice={market.price_info.min}
         />
       )}
       itemProps={{
-        height: 90,
+        height: 110,
         margin: 8,
         styles: { backgroundColor: "transparent" }
       }}
