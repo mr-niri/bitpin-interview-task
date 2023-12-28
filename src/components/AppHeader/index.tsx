@@ -9,11 +9,11 @@ const AppHeader: FC = () => {
 
   return (
     <AppHeaderWrapper>
+
+      <Typography >{strings.title}</Typography>
       <Typography variant="caption">
         {`${strings.SocketStatus}: ${socketStatusInfo.status}`}
       </Typography>
-      <Typography >{strings.title}</Typography>
-      
     </AppHeaderWrapper>
   );
 };

@@ -5,14 +5,16 @@ const AppHeaderWrapper = styled("header")(({ theme }) => ({
   width: "100%",
   backgroundColor: theme.palette.primary.main,
   display: "flex",
-  flexDirection: "row",
-  justifyContent: "space-between",
+  flexDirection: "column",
+  justifyContent: "center",
   alignItems: "center",
   padding: theme.spacing(0, 2),
   color: theme.palette.common.white,
   "&> p": {
-    flex: 1,
     textAlign: "center"
+  },
+  "&> span":{
+    width:"100%",
   }
 }));
 
