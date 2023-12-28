@@ -1,6 +1,6 @@
 import { Box, styled } from "@mui/material";
 
-const HomeWrapper = styled(Box)(({ theme }) => ({
+const HomeWrapper = styled(Box)(() => ({
   flex: 1,
   display: "flex",
   justifyContent: "center",

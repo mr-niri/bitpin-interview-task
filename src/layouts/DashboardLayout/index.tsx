@@ -1,4 +1,4 @@
-import { useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect, type FC } from "react";
 import { Outlet } from "react-router-dom";
 import { marketsListAtom, socketStatusAtom } from "store/atoms/globalAtom";
@@ -8,7 +8,8 @@ import ENV from "utils/ENV";
 const DashboardLayout: FC = () => {
   const setSocketStatusInfo = useSetAtom(socketStatusAtom);
   const setMarketListInfo=useSetAtom(marketsListAtom)
-  
+  const socketStatusInfo = useAtomValue(socketStatusAtom);
+
   const onOpenSocket = (e: Event) => {
     const ws = e.currentTarget as WebSocket;
     ws.send(
@@ -43,10 +44,11 @@ const DashboardLayout: FC = () => {
         status: "Connecting",
         message: "Subscribed to price info."
       });
-    } else if (data.message === "pong") {
+    } else if (data.message === "PONG") {
+      console.log('pong')
       setSocketStatusInfo({
         status: "Connecting",
-        message: "pong"
+        message: "PONG"
       });
     } else if (data.event === "currency_price_info_update") {
 
@@ -70,7 +72,18 @@ const DashboardLayout: FC = () => {
     ws.addEventListener("error", onErrorSocket);
     ws.addEventListener("message", onMessageSocket);
 
+    const pingInterval = setInterval(()=> {
+      if (socketStatusInfo.status === "Connected"){
+        ws.send(
+          JSON.stringify(
+            { "message" : "PING"}
+          )
+        )
+      }
+    }, 1000)
+
     return () => {
+      clearInterval(pingInterval)
       ws.removeEventListener("open", () => onOpenSocket);
       ws.removeEventListener("close", onCloseSocket);
       ws.removeEventListener("error", onErrorSocket);

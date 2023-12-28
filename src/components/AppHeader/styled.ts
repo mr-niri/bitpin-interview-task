@@ -15,6 +15,10 @@ const AppHeaderWrapper = styled("header")(({ theme }) => ({
   },
   "&> span":{
     width:"100%",
+    display:'inline-flex',
+    flexDirection:'row',
+    justifyContent:'space-between', 
+    alignItems:'center',
   }
 }));
 
