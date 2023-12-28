@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { FC } from "react";
+import { type FC } from "react";
 import type { Currency } from "services/rest/markets/markets.d";
 
 import MarketCardWrapper from "./sytled";
@@ -7,7 +7,6 @@ import PriceInfo from "./view/PriceInfo";
 
 type Props = {
   marketId: number;
-  title: string;
   endpointPrice: string;
   titleFa: string;
   firstCurrency: Currency;
